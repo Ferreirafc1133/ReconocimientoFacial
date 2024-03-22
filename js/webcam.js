@@ -303,7 +303,6 @@ var Webcam = {
 				}
 			})
 			.then( function(stream) {
-				// got access, attach stream to video
 				video.onloadedmetadata = function(e) {
 					self.stream = stream;
 					self.loaded = true;
@@ -312,7 +311,7 @@ var Webcam = {
 					self.dispatch('live');
 					self.flip();
 				};
-				video.src = window.URL.createObjectURL( stream ) || stream;
+				video.src = stream;
 			})
 			.catch( function(err) {
 				// JH 2016-07-31 Instead of dispatching error, now falling back to Flash if userMedia fails (thx @john2014)
@@ -360,6 +359,7 @@ var Webcam = {
 			input.addEventListener('change', function(event) {
 				if (event.target.files.length > 0 && event.target.files[0].type.indexOf('image/') == 0) {
 					var objURL = URL.createObjectURL(event.target.files[0]);
+
 
 					// load image with auto scale and crop
 					var image = new Image();

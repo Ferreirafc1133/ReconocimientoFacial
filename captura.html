@@ -66,20 +66,8 @@
     <img id="silueta" class="center" src="media/silueta.png" style=" position:absolute;">
    </div> 
       <div id="my_camera" class="responsive-video col s12 m6 l6">
-        <script language="JavaScript">
-          //height: 50%; width:50%;
-          Webcam.set({
-            width: 300,
-            height: 230,
-            dest_width: 600,
-            dest_height: 460,
-            image_format: 'jpeg',
-            jpeg_quality: 100,
-            flip_horiz: true
-          });
-          Webcam.attach( '#my_camera' );
-        </script>
-          </div>
+            
+      </div>
        <div class="col s12 m6 l6">
          <h2 class="center indigo-text text-darken-4">
            <i id="c3" class="material-icons large" style="display:none">filter_3</i>
@@ -105,41 +93,15 @@
         </form>
       </div>
     </section>
-    <footer class="page-footer indigo darken-4">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Sobre nosotros</h5>
-          <p class="grey-text text-lighten-4">Somos estudiantes de último semestre de ingeniería de sistemas de la universidad Industrial de Santander, actualmente estamos desarrollando nuestro proyecto orientado en métodos de autenticación biométrica.</p>
-
-
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Desarrollado con</h5>
-          <ul>
-            <li><a class="white-text" href="https://aws.amazon.com/es/rekognition/">Amazon Rekognition</a></li>
-            <li><a class="white-text" href="http://materializecss.com/">Materializecss</a></li>
-            <li><a class="white-text" href="https://limonte.github.io/sweetalert2/">SweetAlert2</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Repositorios</h5>
-          <ul>
-            <li><a class="github-button" href="https://github.com/davidjurado/ReconocimientoFacial" data-size="large" aria-label="Star davidjurado/ReconocimientoFacial on GitHub">ReconocimientoFacial</a></li>
-            <li><a class="github-button" href="https://github.com/julian1303/ReconocimientoVocal" data-size="large" aria-label="Star julian1303/ReconocimientoVocal on GitHub">ReconocimientoVocal</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
     <div class="footer-copyright">
       <div class="container">
-      &copy;2017 Universidad Industrial de Santander
+      &copy;2024 PabsWeb.com
       </div>
     </div>
   </footer>
   </body>
 </html>
-<script type="text/javascript">
+<script language="JavaScript">
   function validarEmail( email ) {
     expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if ( !expr.test(email) )
@@ -157,8 +119,6 @@
       return true;
     }
   }
-</script>
-<script type="text/javascript">
   function validateForm()
   {
     var a=document.forms["Form"]["nombre_img"].value;
@@ -177,49 +137,66 @@
       return true;
     }
   }
-</script>
-<script language="JavaScript">
+  $(document).ready(function() {
+    console.log("Inicializando webcam...");
+    Webcam.set({
+        width: 320,
+        height: 240,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    Webcam.attach('#my_camera');
+    Webcam.on('live', function() {
+        console.log('Webcam is live');
+        document.getElementById('boton').disabled = false; 
+    });
+    Webcam.on('error', function(err) {
+        console.error('Webcam error:', err);
+    });
+  });
   function take_snapshot1() {
-    if(validateForm() && validarEmail(document.forms["Form"]["nombre_img"].value)){
-      
+    console.log("Validando formulario...");
+    if (validateForm() && validarEmail(document.forms["Form"]["nombre_img"].value)) {
+        console.log("Formulario validado. Deshabilitando botón y preparando cámara...");
         document.getElementById('boton').disabled = true;
-      var cameraSound = new Audio('media/camera.wav');
-      var beepSound = new Audio('media/beep.wav');
-      setTimeout(function(){beepSound.play();
-      document.getElementById('c3').style.display = 'block';
-      },1);
-      setTimeout(function(){beepSound.play();
-      document.getElementById('c2').style.display = 'block';
-      document.getElementById('c3').style.display = 'none';
-      },1000);
-      setTimeout(function(){beepSound.play();
-       document.getElementById('c1').style.display = 'block';
-      document.getElementById('c2').style.display = 'none';
 
-      },2000);
-      setTimeout(function(){cameraSound.play();
-      document.getElementById('silueta').style.display = 'none';
-      },3000);
-  
-      setTimeout(function(){
+        var cameraSound = new Audio('media/camera.wav');
+        var beepSound = new Audio('media/beep.wav');
+        
+        // Mostrar cuenta regresiva
+        setTimeout(function(){ beepSound.play(); document.getElementById('c3').style.display = 'block'; }, 1000);
+        setTimeout(function(){ beepSound.play(); document.getElementById('c2').style.display = 'block'; document.getElementById('c3').style.display = 'none'; }, 2000);
+        setTimeout(function(){ beepSound.play(); document.getElementById('c1').style.display = 'block'; document.getElementById('c2').style.display = 'none'; }, 3000);
+        
+        setTimeout(function(){
+            cameraSound.play();
+            document.getElementById('silueta').style.display = 'none';
+            console.log("Capturando imagen...");
 
-      document.getElementById('carga').style.display = 'block';
-      swal({
-        title: 'Cargando',
-        text: 'Tu imagen se esta cargando',
-        allowOutsideClick: false,
-        onOpen: function () {
-          swal.showLoading()
-        }
-      }).then(function () {},)
-            Webcam.snap( function(data_uri) {
-              var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
-              document.getElementById('mydata').value = raw_image_data;
-              document.getElementById('myform').submit();
-            } );
+            document.getElementById('carga').style.display = 'block';
+            swal({
+                title: 'Cargando',
+                text: 'Tu imagen se está cargando',
+                allowOutsideClick: false,
+                onOpen: function () {
+                    swal.showLoading();
+                }
+            });
 
-      },3000)
+            Webcam.snap(function(data_uri) {
+                console.log("Imagen capturada.");
+                var raw_image_data = data_uri.replace(/^data:image\/\w+;base64,/, '');
+                document.getElementById('mydata').value = raw_image_data;
+                console.log("Enviando formulario...");
+                document.getElementById('myform').submit();
+            });
 
+        }, 4000); // Asegúrate de ajustar este tiempo si cambias la secuencia de la cuenta regresiva
+    }
+    else {
+        console.log("Validación del formulario fallida.");
     }
   }
 </script>
+
+

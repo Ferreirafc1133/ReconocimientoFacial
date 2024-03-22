@@ -49,37 +49,6 @@
 	<div id="carga" class="progress" style="display:none">
 		<div  class="indeterminate"></div>
   	</div>
-	<section class="aboutContent">
-		<div class="container">
-			<h1 class="responsive center">Módulo</h1>
-			<p>A continuación podrá identificar su identidad con solo tomar una foto, para lograr esto es necesario que se haya registrado anteriormente con un correo y se haya detectado su rostro de forma satisfactoria. A continuación por favor ingrese su correo electronico, luego seleccione una pose con la cual se va a tomar la foto y por ultimo de click al botón "ingresar".</p>
-		</div>
-	</section>
-	<section>
-		<div class="container row">
-			<div id="my_camera" class="responsive-video col s12 m6 l6">
-				<script language="JavaScript">
-					Webcam.set({
-						width: 300,
-						height: 230,
-						dest_width: 600,
-						dest_height: 460,
-						image_format: 'jpeg',
-						jpeg_quality: 100,
-             flip_horiz: true,
-					});
-					Webcam.attach( '#my_camera' );
-				</script>
-          </div>
-			 <div class="col s12 m6 l6">
-         <h2 class="center indigo-text text-darken-4">
-           <i id="c3" class="material-icons large" style="display:none">filter_3</i>
-            <i id="c2" class="material-icons large" style="display:none">filter_2</i>
-            <i id="c1" class="material-icons large" style="display:none">mood</i>
-         </h2>
-        </div> 
-		</div>
-	</section>
 	<section class="inquiry">
 		<div class="container row">
 			<form id="myform" name="Form" method="post" action="comparelogin.php">
@@ -137,15 +106,34 @@
 			</form>
 		</div>
 	</section>
+  <section>
+		<div class="container row">
+			<div id="my_camera" class="responsive-video col s12 m6 l6">
+				<script language="JavaScript">
+					Webcam.set({
+						width: 300,
+						height: 230,
+						dest_width: 600,
+						dest_height: 460,
+						image_format: 'jpeg',
+						jpeg_quality: 100,
+             flip_horiz: true,
+					});
+					Webcam.attach( '#my_camera' );
+				</script>
+          </div>
+			 <div class="col s12 m6 l6">
+         <h2 class="center indigo-text text-darken-4">
+           <i id="c3" class="material-icons large" style="display:none">filter_3</i>
+            <i id="c2" class="material-icons large" style="display:none">filter_2</i>
+            <i id="c1" class="material-icons large" style="display:none">mood</i>
+         </h2>
+        </div> 
+		</div>
+	</section>
     <footer class="page-footer indigo darken-4">
     <div class="container">
       <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Sobre nosotros</h5>
-          <p class="grey-text text-lighten-4">Somos estudiantes de último semestre de ingeniería de sistemas de la universidad Industrial de Santander, actualmente estamos desarrollando nuestro proyecto orientado en métodos de autenticación biométrica.</p>
-
-
-        </div>
         <div class="col l3 s12">
           <h5 class="white-text">Desarrollado con</h5>
           <ul>
@@ -154,18 +142,11 @@
             <li><a class="white-text" href="https://limonte.github.io/sweetalert2/">SweetAlert2</a></li>
           </ul>
         </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Repositorios</h5>
-          <ul>
-            <li><a class="github-button" href="https://github.com/davidjurado/ReconocimientoFacial" data-size="large" aria-label="Star davidjurado/ReconocimientoFacial on GitHub">ReconocimientoFacial</a></li>
-            <li><a class="github-button" href="https://github.com/julian1303/ReconocimientoVocal" data-size="large" aria-label="Star julian1303/ReconocimientoVocal on GitHub">ReconocimientoVocal</a></li>
-          </ul>
-        </div>
       </div>
     </div>
     <div class="footer-copyright">
       <div class="container">
-      &copy;2017 Universidad Industrial de Santander
+        &copy;2024 PabsWeb.com
       </div>
     </div>
   </footer>
